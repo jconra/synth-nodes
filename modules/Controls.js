@@ -35,17 +35,24 @@ class Controls {
   }
   update() {
     if (this.mouse.down) {
-      console.log(this.isClick());
-      this.camera.position.x += (this.mouse.xD - this.mouse.x) / 10;
-      this.camera.position.y -= (this.mouse.yD - this.mouse.y) / 10;
+      let xChange = (this.mouse.xD - this.mouse.x) / 15;
+      let yChange = (this.mouse.yD - this.mouse.y) / 15;
       this.mouse.xD = this.mouse.x;
       this.mouse.yD = this.mouse.y;
+      let clicks = this.isClick();
+      if (clicks.length > 0) {
+        clicks[0].object.position.x -= xChange;
+        clicks[0].object.position.y += yChange;
+      } else {
+        this.camera.position.x += xChange;
+        this.camera.position.y -= yChange;
+      }
     }
   }
   isClick() {
     const pointer = new THREE.Vector2(
       (this.mouse.x / window.innerWidth) * 2 - 1,
-      (this.mouse.y / window.innerHeight) * 2 - 1);
+      -(this.mouse.y / window.innerHeight) * 2 + 1);
     raycaster.setFromCamera( pointer, this.camera);
     console.log(pointer);
     return raycaster.intersectObjects( this.clickable );

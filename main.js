@@ -20,7 +20,7 @@ document.body.appendChild(renderer.domElement);
 let scene = new THREE.Scene();
 // Create a camera
 let camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-camera.position.z = 50;
+camera.position.z = 20;
 
 scene.add(camera);
 
@@ -30,7 +30,7 @@ clickable.push(node.model);
 
 let node2 = new Node(new THREE.Vector3(10,0,0));
 scene.add(node2.model);
-clickable.push(node.model);
+clickable.push(node2.model);
 
 // Create a light, set its position, and add it to the scene.
 const pointLight = new THREE.PointLight(0xffffff, 10);
